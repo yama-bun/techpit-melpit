@@ -57,7 +57,49 @@
                         @enderror
                     </div>
 
-                    
+                    <div class="form-group mt-3">
+                        <label for="category">カテゴリー</label>
+                        <select name="category" class="custom-select form-control @error('category') is-invalid @enderror">
+
+                        </select>
+                        @error('category')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="condition">商品の状態</label>
+                        <select name="condition" class="custom-select form-control @error('condition') is-invalid @enderror">
+                            @foreach ($conditions as $condition)
+                                <option value="{{ $condition->id }}" {{ old('condition') == $condition->id ? 'selected' : '' }}>
+                                    {{ $condition->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('condition')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="price">販売価格</label>
+                        <input type="number" name="price" id="price" class="form-control @error('price') is-invaled @enderror" value="{{ old('price') }}" required autocomplete="price" autofocus>
+                        @error('price')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-0 mt3">
+                        <button type="submit" class="btn btn-block btn-secondary">
+                            出品する
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
