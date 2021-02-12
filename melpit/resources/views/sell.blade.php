@@ -60,7 +60,15 @@
                     <div class="form-group mt-3">
                         <label for="category">カテゴリー</label>
                         <select name="category" class="custom-select form-control @error('category') is-invalid @enderror">
-
+                            @foreach ($categories as $category)
+                                <optgroup label="{{ $category->name }}">
+                                    @foreach ($category->secondaryCategories as $secondary)
+                                        <option value="{{ $secondary->id }}" {{ old('category') == $secondary->id ? 'selected' : '' }}>
+                                            {{ $secondary->name }}
+                                        </option>
+                                    @endforeach
+                                </optgroup>
+                            @endforeach
                         </select>
                         @error('category')
                             <span class="invalid-feedback" role="alert">
