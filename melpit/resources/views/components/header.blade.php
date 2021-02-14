@@ -6,6 +6,27 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
+                <form action="{{ route('top') }}" method="GET" class="form-inline">
+                    <div class="iinput-group">
+                        <div class="input-group-prepend">
+                            <select name="category" class="custom-select">
+                                <option value="">全て</option>
+                                @foreach ($categories as $category)
+                                    <option value="primary:{{ $category->id }}" class="font-weight-bold">{{ $category->name }}</option>
+                                        @foreach ($category->secondaryCategories as $secondary)
+                                            <option value="secondary:{{ $secondary->id }}">{{ $secondary->name }}</option>
+                                        @endforeach
+                                @endforeach
+                            </select>
+                        </div>
+                        <input type="text" name="keyword" class="form-control" aria-label="Text input with dropdown button" placeholder="キーワード検索">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-dark">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
                 @guest
                     <li class="nav-item">
                         <a href="{{ route('register') }}" class="btn btn-secondary ml-3" role="button">会員登録</a>
